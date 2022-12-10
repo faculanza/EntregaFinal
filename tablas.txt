@@ -1,0 +1,34 @@
+USUARIOS
+nombre
+apellido
+usuario
+contraseña
+email
+imagen (avatar)
+
+
+BLOG
+titulo
+subtítulo (yo puse un resumen, no se si seria lo mismo, pero esto lo piden)
+resumen (esto se veria en el listado de blogs)
+cuerpo (se ve cuando se amplia el blog)
+imagen
+idusuario (autor)
+fecha
+
+COMENTARIOS (estos serían los comentarios en los blogs)
+comentario
+idusuario
+fecha
+
+----------------------------------------------
+Para la app de mensajeria
+
+MENSAJES
+fecha
+hora
+mensaje
+idautor
+iddestinatario
+
+
