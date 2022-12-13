@@ -11241,6 +11241,16 @@ header.masthead .site-heading .h1 {
 .post-preview > .post-meta > a {
   text-decoration: none;
 }
+
+.tabla_form table {margin:0 auto 20px auto;}
+
+.tabla_form th, .tabla_form td {padding:5px;}
+
+.tabla_form td input {border:1px solid #ccc;}
+
+.tabla_form th {font-weight:normal;text-align:right;}
+
+
 @media (min-width: 992px) {
   .post-preview > a > .post-title {
     font-size: 2.25rem;

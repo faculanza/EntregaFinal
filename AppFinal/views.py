@@ -1,9 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from AppFinal.models import Usuarios
 from AppFinal.forms import AgreReg
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 
 def inicio(request):
@@ -44,7 +47,26 @@ def registro(request):
 
 
 def login(request):
-    return render(request, "login.html")
+
+    errors = ""
+
+    if request.method == "POST":
+        formulario = AuthenticationForm(request, data=request.POST)
+
+        if formulario.is_valid():
+            data = formulario.cleaned_data
+
+            user = authenticate(username=data["usuario"], password=data["password"])
+            
+            if user is not None:
+                login(request, user)
+                return redirect("inicio")
+            else:
+                return render(request, "login.html", {"form": formulario, "errors": "Credenciales invalidas"})
+        else:
+            return render(request, "login.html", {"form": formulario, "errors": formulario.errors})
+    formulario = AuthenticationForm()
+    return render(request, "login.html", {"form": formulario, "errors": errors})
 
 def chat(request):
     return render(request, "chat.html")

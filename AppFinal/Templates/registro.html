@@ -16,15 +16,23 @@
         </header>
         <!-- Main Content-->
         <div class="container px-4 px-lg-5">
+            
             {% if miFormulario.errors %}
             <p>Están mal los datos</p>
             {% endif %}
-            
-            <form action="" method="POST">
-                {% csrf_token %}
-                {{ miFormulario.as_p }}
-                <p><button type="submit">Registrate</button></p>
-            </form>
-            
+            <div class="col-md-10 col-lg-8 col-xl-7"></div>
+                <div class="tabla_form">
+                    <table>
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            {{ miFormulario.as_table }}
+                            <tr>
+                                <td></td>
+                                <td><button type="submit">Registrate</button></td>
+                            </tr>
+                        </form>
+                    </table>
+                </div>
+            </div>
         </div>
 {% endblock %}        
