@@ -2,8 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
-from AppFinal.models import Usuarios
-from AppFinal.forms import AgreReg
+from AppFinal.models import Blogs
+from AppFinal.forms import NuevoBlog, UserRegisterForm
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -15,38 +15,38 @@ def inicio(request):
 def about(request):
     return render(request, "about.html")
 
-def registro(request):
+def NuevoBlog(request):
     if request.method == "POST":
-        miFormulario = AgreReg(request.POST)
+        miFormulario = NuevoBlog(request.POST)
         
         if miFormulario.is_valid():
             # Accedemos al diccionario que contiene
             # la informacion del formulario
             data = miFormulario.cleaned_data
 
-            registracion = Usuarios(nombre=data["nombre"], apellido=data["apellido"], usuario=data["usuario"], password=data["password"], email=data["email"])
-            registracion.save()
-            return render(request, "inicio.html")
+            nBlog = Blogs(titulo=data["titulo"], subtitulo=data["subtitulo"], resumen=data["resumen"], contenido=data["password"], email=data["contenido"])
+            nBlog.save()
+            return render(request, "index.html")
             
-    miFormulario = AgreReg()
-    return render(request, "registro.html", {"miFormulario": miFormulario})
+    miFormulario = NuevoBlog()
+    return render(request, "NuevoBlog.html", {"miFormulario": miFormulario})
 
-# def registro(request):
-#     if request.method == "POST":
-#         formulario = UserRegisterForm(request.POST)
-
-#         if formulario.is_valid():
+def registro(request):
+    if request.method == "POST":
+        formulario = UserRegisterForm(request.POST)
+        
+        if formulario.is_valid():
             
-#             formulario.save()
-#             return redirect("inicio")
-#         else:
-#             return render(request, "registro.html", { "form": formulario, "errors": formulario.errors})
+            formulario.save()
+            return render(request, "index.html")
+        else:
+            return render(request, "registro.html", { "form": formulario, "errors": formulario.errors})
 
-#     formulario  = UserRegisterForm()
-#     return render(request, "registro.html", { "form": formulario})
+    formulario  = UserRegisterForm()
+    return render(request, "registro.html", { "form": formulario})
 
 
-def login(request):
+def loginPage(request):
 
     errors = ""
 
@@ -56,11 +56,11 @@ def login(request):
         if formulario.is_valid():
             data = formulario.cleaned_data
 
-            user = authenticate(username=data["usuario"], password=data["password"])
+            user = authenticate(username=data["username"], password=data["password"])
             
             if user is not None:
                 login(request, user)
-                return redirect("inicio")
+                return render(request, "index.html")
             else:
                 return render(request, "login.html", {"form": formulario, "errors": "Credenciales invalidas"})
         else:
