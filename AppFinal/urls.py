@@ -8,6 +8,7 @@ urlpatterns =[
     path('registro/',views.registro, name='registro'),  
     path('loginPage/',views.loginPage, name='loginPage'),  
     path('chat/',views.chat, name='chat'),
+    path('NuevoBlog/',views.NuevoBlog, name='NuevoBlog'),
     # path('AgregarCategoria/',views.AgregarCategoria, name='AgregarCategoria'),
     # path('AgregarProducto/',views.AgregarProducto, name='AgregarProducto'),
     # path('buscarproducto/',views.buscarproducto, name='buscarproducto'),

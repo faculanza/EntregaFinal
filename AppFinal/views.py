@@ -3,14 +3,19 @@ from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from AppFinal.models import Blogs
-from AppFinal.forms import NuevoBlog, UserRegisterForm
+from AppFinal.forms import FormNuevoBlog, UserRegisterForm
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
 
 def inicio(request):
-    return render(request, "index.html")
+    blogs = Blogs.objects.all() # Obtener TODOS los registros de ese modelo
+    # Creamos el contexto
+    contexto = {"listado_blogs": blogs}
+    
+    return render(request, "index.html", contexto)
+
 
 def about(request):
     return render(request, "about.html")
@@ -24,12 +29,12 @@ def NuevoBlog(request):
             # la informacion del formulario
             data = miFormulario.cleaned_data
 
-            nBlog = Blogs(titulo=data["titulo"], subtitulo=data["subtitulo"], resumen=data["resumen"], contenido=data["password"], email=data["contenido"])
+            nBlog = Blogs(titulo=data["titulo"], subtitulo=data["subtitulo"], resumen=data["resumen"], contenido=data["contenido"], email=data["amail"])
             nBlog.save()
             return render(request, "index.html")
             
-    miFormulario = NuevoBlog()
-    return render(request, "NuevoBlog.html", {"miFormulario": miFormulario})
+    miFormulario = FormNuevoBlog()
+    return render(request, "nuevo_blog.html", {"miFormulario": miFormulario})
 
 def registro(request):
     if request.method == "POST":
@@ -70,4 +75,6 @@ def loginPage(request):
 
 def chat(request):
     return render(request, "chat.html")
+
+
 
