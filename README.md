@@ -6,9 +6,13 @@ Entrega Final Python
 La pagina consta de un menu que lleva a las siguientes vistas:
 
 Inicio
+
 Acerca Nuestro
+
 Registrate
+
 Login
+
 Chat
 
 
