@@ -22,13 +22,22 @@
                 {% if listado_blogs %}
                     {% for blog in listado_blogs %}
                     <div class="post-preview">
-                        <a href="{% url 'blogAmpliado' blog.id %}">
+                        
                             <h2 class="post-title">{{blog.titulo}}</h2>
                             <h3 class="post-subtitle">{{blog.subtitulo}}</h3>
-                        </a>
+                        
                         <p class="post-meta">
-                            Posted by Usuario {{blog.idusuario}} - {{blog.fecha}}                            
+                            Posted by Start Bootstrap - {{blog.fecha}}
                         </p>
+
+                        <p class="post-meta">
+                            {{blog.resumen}}
+                        </p>
+
+                        <p class="post-meta">
+                           {{blog.cuerpo}}
+                        </p>
+                        
                     </div>
                     <!-- Divider-->
                     <!-- Post preview-->
@@ -43,10 +52,7 @@
                     {% if request.user.is_authenticated %}
                     <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'NuevoBlog' %}">Crear reseña →</a></div>
                     {% else %}
-                    <p class="text-center">Para crear una reseña debe estar registrado</p>
-                    <div class="d-flex justify-content-center mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'registro' %}">registrarse</a> &nbsp; <a class="btn btn-primary text-uppercase" href="{% url 'loginPage' %}">iniciar sesión</a></div>
-                    
-
+                    <div class="d-flex justify-content-end mb-4">Para crear una reseña debe estar <a href="{% url 'registro' %}">registrado</a></div>
                     {% endif %}
                 </div>
             </div>

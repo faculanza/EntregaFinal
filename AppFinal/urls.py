@@ -6,15 +6,12 @@ urlpatterns =[
     path('',views.inicio, name='inicio'),
     path('about/',views.about, name='about'),  
     path('registro/',views.registro, name='registro'),  
-    path('loginPage/',views.loginPage, name='loginPage'),  
+    path('loginPage/',views.loginPage, name='loginPage'), 
     path('chat/',views.chat, name='chat'),
     path('NuevoBlog/',views.NuevoBlog, name='NuevoBlog'),
-    # path('AgregarCategoria/',views.AgregarCategoria, name='AgregarCategoria'),
-    # path('AgregarProducto/',views.AgregarProducto, name='AgregarProducto'),
-    # path('buscarproducto/',views.buscarproducto, name='buscarproducto'),
-    # path('resultado_producto/',views.resultado_producto, name='resultado_producto'),
-
-    
+    path('blogAmpliado/<id>/',views.blogAmpliado, name='blogAmpliado'),
+    path("logoutPage/", LogoutView.as_view(template_name='logout.html'), name="logoutPage"),
+      
 
 
 ]

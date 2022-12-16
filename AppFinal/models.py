@@ -17,7 +17,6 @@ class Blogs(models.Model):
     resumen = models.TextField()
     cuerpo = models.TextField()
     imagen = models.ImageField(upload_to="imgBlogs", null=True, blank=True)
-    email = models.EmailField()
     idusuario = models.IntegerField()
     fecha = models.DateField()
 

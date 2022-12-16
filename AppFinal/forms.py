@@ -2,12 +2,15 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+
 class FormNuevoBlog(forms.Form):
     titulo = forms.CharField()
     subtitulo = forms.CharField()
     resumen = forms.CharField()
-    contenido = forms.CharField()
-    email = forms.EmailField()
+    cuerpo = forms.CharField()
+    #resumen = forms.Textarea()
+    #cuerpo= forms.TextInput()
+    
     
 
 class UserRegisterForm(UserCreationForm):

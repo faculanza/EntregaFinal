@@ -19,35 +19,33 @@
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <!-- Post preview-->
-                {% if listado_blogs %}
-                    {% for blog in listado_blogs %}
                     <div class="post-preview">
-                        <a href="{% url 'blogAmpliado' blog.id %}">
-                            <h2 class="post-title">{{blog.titulo}}</h2>
-                            <h3 class="post-subtitle">{{blog.subtitulo}}</h3>
-                        </a>
+                        
+                            <h2 class="post-title">{{listado_blogs.titulo}}</h2>
+                            <h5 class="post-subtitle">{{listado_blogs.subtitulo}}</h5>
+                        
                         <p class="post-meta">
-                            Posted by Usuario {{blog.idusuario}} - {{blog.fecha}}                            
+                            Posted by Usuario {{listado_blogs.idusuario}} - {{listado_blogs.fecha}}
                         </p>
+
+                        <p class="post-meta">
+                            {{listado_blogs.resumen}}
+                        </p>
+
+                        <p class="post-meta">
+                           {{listado_blogs.cuerpo}}
+                        </p>
+                        
                     </div>
                     <!-- Divider-->
                     <!-- Post preview-->
-                        {% endfor %}
-                    {% else %}
-                        <p>No hay blogs disponibles de momento</p>
-                    {% endif %}
+                      
                     
                     <!-- Divider-->
                     <hr class="my-4" />
                     <!-- Pager-->
-                    {% if request.user.is_authenticated %}
-                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'NuevoBlog' %}">Crear reseña →</a></div>
-                    {% else %}
-                    <p class="text-center">Para crear una reseña debe estar registrado</p>
-                    <div class="d-flex justify-content-center mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'registro' %}">registrarse</a> &nbsp; <a class="btn btn-primary text-uppercase" href="{% url 'loginPage' %}">iniciar sesión</a></div>
+                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="javascript:history.back();">volver</a></div>
                     
-
-                    {% endif %}
                 </div>
             </div>
         </div>
