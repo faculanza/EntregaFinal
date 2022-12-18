@@ -17,18 +17,15 @@
         <!-- Main Content-->
         <div class="container px-4 px-lg-5">
             
-            {% if miFormulario.errors %}
-            <p>Están mal los datos</p>
-            {% endif %}
             <div class="col-md-10 col-lg-8 col-xl-7"></div>
                 <div class="tabla_form">
                     <table>
                         <form action="" method="POST">
                             {% csrf_token %}
-                            {{ miFormulario.as_table }}
+                            {{ formulario.as_table }}
                             <tr>
                                 <td></td>
-                                <td><button class="btn btn-primary text-uppercase" type="submit">Agregar</button></td>
+                                <td><button class="btn btn-primary text-uppercase" type="submit">Actualizar</button></td>
                             </tr>
                         </form>
                     </table>

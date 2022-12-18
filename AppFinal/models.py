@@ -19,6 +19,7 @@ class Blogs(models.Model):
     imagen = models.ImageField(upload_to="imgBlogs", null=True, blank=True)
     idusuario = models.IntegerField()
     fecha = models.DateField()
+    usuario=models.CharField(max_length=150, null=True)
 
 #COMENTARIOS (estos serían los comentarios en los blogs)
 class Comentarios(models.Model):
@@ -26,6 +27,7 @@ class Comentarios(models.Model):
     idusuario = models.IntegerField()
     idblog = models.IntegerField()
     fecha = models.DateField()
+    usuario=models.CharField(max_length=150, null=True)
 
 #Para la app de mensajeria
 class Mensajes(models.Model):
@@ -33,5 +35,6 @@ class Mensajes(models.Model):
     hora = models.TimeField()
     mensaje = models.TextField()
     idautor = models.IntegerField()
-    iddestinatario = models.IntegerField()
+    destinatario = models.CharField(max_length=150, null=True)
+    autor = models.CharField(max_length=150, null=True)
 

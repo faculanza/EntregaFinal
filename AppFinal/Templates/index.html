@@ -27,7 +27,12 @@
                             <h3 class="post-subtitle">{{blog.subtitulo}}</h3>
                         </a>
                         <p class="post-meta">
-                            Posted by Usuario {{blog.idusuario}} - {{blog.fecha}}                            
+                            <i>Posted by {{blog.usuario}} - {{blog.fecha}}</i><br>
+                            {{blog.resumen}}<br>
+                            {% if blog.idusuario == request.user.id %}
+                                <a style="color:green;" href="{% url 'editarBlog' blog.id %}">Editar</a>
+                                - <a style="color:red;" href="{% url 'eliminarBlog' blog.id %}">Eliminar</a>
+                            {% endif %}                           
                         </p>
                     </div>
                     <!-- Divider-->
@@ -45,10 +50,9 @@
                     {% else %}
                     <p class="text-center">Para crear una reseña debe estar registrado</p>
                     <div class="d-flex justify-content-center mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'registro' %}">registrarse</a> &nbsp; <a class="btn btn-primary text-uppercase" href="{% url 'loginPage' %}">iniciar sesión</a></div>
-                    
 
                     {% endif %}
                 </div>
             </div>
         </div>
-{% endblock %}        
+{% endblock %}

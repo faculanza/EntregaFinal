@@ -15,31 +15,60 @@
             </div>
         </header>
         <!-- Main Content-->
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
-                    <!-- Post preview-->
-                    <div class="post-preview">
-                        
-                            <h2 class="post-title">{{listado_blogs.titulo}}</h2>
-                            <h5 class="post-subtitle">{{listado_blogs.subtitulo}}</h5>
-                        
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <h2 class="post-title">{{listado_blogs.titulo}}</h2>
+                        <h4 class="post-subtitle">{{listado_blogs.subtitulo}}</h4>
                         <p class="post-meta">
-                            Posted by Usuario {{listado_blogs.idusuario}} - {{listado_blogs.fecha}}
+                            <i>Posted by Usuario {{listado_blogs.usuario}} - {{listado_blogs.fecha}}</i>
                         </p>
+                        <p>{{listado_blogs.resumen}}</p>
+                        <p>{{listado_blogs.cuerpo}}</p>
+                        {% if listado_blogs.idusuario == request.user.id %}
+                        <p>
+                        <a style="color:green;" href="{% url 'editarBlog' listado_blogs.id %}">Editar</a>
+                        - <a style="color:red;" href="{% url 'eliminarBlog' listado_blogs.id %}">Eliminar</a>
+                        </p>
+                        {% endif %}
+                        
+                        <hr class="my-4" />
 
-                        <p class="post-meta">
-                            {{listado_blogs.resumen}}
-                        </p>
+                        <h5>Comentarios</h5>
+                        {% if listado_coments %}
+                            {% for coment in listado_coments %}
+                            <p>{{ coment.comentario }}<br>
+                                <i>{{ coment.usuario }} - {{ coment.fecha }} </i>                                 
+                                {% if coment.idusuario == request.user.id %}
+                                - <a style="color:red;" href="{% url 'eliminarComent' coment.id listado_blogs.id %}">Eliminar</a>                                
+                                {% endif %}
+                            </p>
+                            <hr class="my-4" />
+                            {% endfor %}
+                        {% else %}
+                            <p style="color:#666;text-align:center;">No hay comentarios de esta reseña....</p>
+                        {% endif %}
+                        {% if request.user.is_authenticated %}
+                        <div class="tabla_form">
+                            <h6>Agregar Comentario</h6>
+                            <table>
+                            <form method="post">
+                                
+                                {% csrf_token %}
+                                <input type="hidden" name="idblog" value='{{listado_blogs.id}}'>
+                                {{ form.as_table }}
+                                <tr>
+                                    <td></td>
+                                    <td><input class="btn btn-primary text-uppercase" type="submit" value="Agregar"></td>
+                                </tr>
+                                
+                            </form>
+                            </table>
+                        </div>
+                        {% endif %}
 
-                        <p class="post-meta">
-                           {{listado_blogs.cuerpo}}
-                        </p>
-                        
                     </div>
-                    <!-- Divider-->
-                    <!-- Post preview-->
-                      
                     
                     <!-- Divider-->
                     <hr class="my-4" />
@@ -48,5 +77,6 @@
                     
                 </div>
             </div>
-        </div>
+        </article>
+                                                                                 
 {% endblock %}        
